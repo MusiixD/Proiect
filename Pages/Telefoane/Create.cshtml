@@ -1,0 +1,82 @@
+﻿@page
+@model Proiect.Pages.Telefoane.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Telefon</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Telefon.Denumire" class="control-label"></label>
+                <input asp-for="Telefon.Denumire" class="form-control" />
+                <span asp-validation-for="Telefon.Denumire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefon.So" class="control-label"></label>
+                <input asp-for="Telefon.So" class="form-control" />
+                <span asp-validation-for="Telefon.So" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefon.Pret" class="control-label"></label>
+                <input asp-for="Telefon.Pret" class="form-control" />
+                <span asp-validation-for="Telefon.Pret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefon.DataLansarii" class="control-label"></label>
+                <input asp-for="Telefon.DataLansarii" class="form-control" />
+                <span asp-validation-for="Telefon.DataLansarii" class="textdanger"></span>
+            </div>
+            <label asp-for="Telefon.IDProducator" class="control-label">Nume producator</label>
+            <select asp-for="Telefon.IDProducator" class="form-control" asp-items="ViewBag.IDProducator">
+            </select>
+            <span asp-validation-for="Telefon.IDProducator" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="Telefon.IDProducator" class="control-label"></label>
+                <select asp-for="Telefon.IDProducator" class="form-control" aspitems="ViewBag.IDProducator"></select>
+            </div>
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                foreach (var cat in Model.AssignedCategoryDataList)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedCourses"
+                                               value="@cat.IDCategorie"
+                                               @(Html.Raw(cat.Assigned ? "checked=\"checked\"" : "")) />
+                                        @cat.IDCategorie @: @cat.IDCategorie
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
